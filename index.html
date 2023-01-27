@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- <link rel="stylesheet" href="./css/index.css" /> -->
+  <link rel="shortcut icon"
+    href="https://lf16-tiktok-common.ibytedtos.com/obj/tiktok-web-common-sg/mtact/static/images/logo_144c91a.png?v=2"
+    type="image/x-icon">
+  <script src="https://kit.fontawesome.com/1a015cf62c.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./css/style.css" />
+  <title>Tik-Tok</title>
+</head>
+
+<body>
+  <!-- <form>
+      <label for="email">Email</label>
+      <input type="email" placeholder="email" id="email" />
+      <label for="password">password</label>
+      <input type="password" placeholder="password" id="password" />
+      <button class="btn-signup">Sign Up</button>
+      <button class="btn-login">Sign In</button>
+    </form>
+    <button class="btn-save">Save Data</button>
+    <button class="btn-get-data">Get Data</button>
+    <button class="btn-update-data">Update Data</button>
+    <button class="btn-delete-data">Delete Data</button> -->
+
+  <header>
+    <nav class="navbar">
+      <!-- <img class="logo" src="assets/logo.png" alt="Tiktok" /> -->
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 118 30" width="118" height="42" alt="TikTok">
+        <path fill="#25F4EE"
+          d="M9.875 11.842v-1.119A8.836 8.836 0 008.7 10.64c-4.797-.006-8.7 3.9-8.7 8.707a8.706 8.706 0 003.718 7.135A8.675 8.675 0 011.38 20.55c0-4.737 3.794-8.598 8.495-8.707z">
+        </path>
+        <path fill="#25F4EE"
+          d="M10.087 24.526c2.14 0 3.89-1.707 3.966-3.83l.007-18.968h3.462a6.78 6.78 0 01-.109-1.202h-4.727l-.006 18.968a3.978 3.978 0 01-3.967 3.83 3.93 3.93 0 01-1.846-.46 3.949 3.949 0 003.22 1.662zM23.992 8.166V7.111a6.506 6.506 0 01-3.584-1.067 6.572 6.572 0 003.584 2.122z">
+        </path>
+        <path fill="#FE2C55"
+          d="M20.41 6.044a6.54 6.54 0 01-1.617-4.316h-1.265a6.557 6.557 0 002.881 4.316zM8.707 15.365a3.98 3.98 0 00-3.974 3.976c0 1.528.87 2.858 2.134 3.523a3.937 3.937 0 01-.754-2.321 3.98 3.98 0 013.973-3.976c.41 0 .805.07 1.176.185v-4.833a8.852 8.852 0 00-1.176-.083c-.07 0-.134.006-.204.006v3.708a3.999 3.999 0 00-1.175-.185z">
+        </path>
+        <path fill="#FE2C55"
+          d="M23.992 8.166v3.676a11.25 11.25 0 01-6.579-2.116v9.621c0 4.802-3.903 8.714-8.706 8.714a8.669 8.669 0 01-4.99-1.579 8.69 8.69 0 006.37 2.781c4.796 0 8.706-3.906 8.706-8.714v-9.621a11.25 11.25 0 006.579 2.116v-4.73c-.479 0-.939-.052-1.38-.148z">
+        </path>
+        <path fill="white"
+          d="M17.413 19.348V9.726a11.25 11.25 0 006.58 2.116V8.166a6.572 6.572 0 01-3.584-2.122 6.611 6.611 0 01-2.887-4.316h-3.463l-.006 18.968a3.978 3.978 0 01-3.967 3.83 3.99 3.99 0 01-3.225-1.656 3.991 3.991 0 01-2.134-3.523A3.98 3.98 0 018.7 15.372c.409 0 .805.07 1.176.185v-3.708c-4.702.103-8.496 3.964-8.496 8.701 0 2.29.888 4.373 2.338 5.933a8.669 8.669 0 004.989 1.58c4.797 0 8.706-3.913 8.706-8.715zM30.048 8.179h14.775l-1.355 4.232h-3.832v15.644h-4.778V12.41l-4.804.006-.006-4.238zM69.032 8.179h15.12l-1.354 4.232h-4.172v15.644h-4.784V12.41l-4.803.006-.007-4.238zM45.73 14.502h4.733v13.553h-4.708l-.026-13.553zM52.347 8.128h4.733v9.257l4.689-4.61h5.647l-5.934 5.76 6.643 9.52h-5.213l-4.433-6.598-1.405 1.362v5.236h-4.733V8.128h.006zM102.49 8.128h4.734v9.257l4.688-4.61h5.647l-5.934 5.76 6.643 9.52h-5.206l-4.433-6.598-1.405 1.362v5.236h-4.734V8.128zM48.093 12.954a2.384 2.384 0 10-.002-4.771 2.384 2.384 0 00.002 4.771z">
+        </path>
+        <path fill="#25F4EE"
+          d="M83.544 19.942a8.112 8.112 0 017.474-8.087 8.748 8.748 0 00-.709-.026c-4.478 0-8.106 3.631-8.106 8.113 0 4.482 3.628 8.113 8.106 8.113.21 0 .498-.013.71-.026-4.178-.326-7.475-3.823-7.475-8.087z">
+        </path>
+        <path fill="#FE2C55"
+          d="M92.858 11.83c-.217 0-.505.012-.715.025a8.111 8.111 0 017.467 8.087 8.111 8.111 0 01-7.467 8.087c.21.02.498.026.715.026 4.478 0 8.106-3.631 8.106-8.113 0-4.482-3.628-8.113-8.106-8.113z">
+        </path>
+        <path fill="white"
+          d="M91.58 23.887a3.94 3.94 0 01-3.94-3.945 3.94 3.94 0 117.882 0c0 2.18-1.77 3.945-3.941 3.945zm0-12.058c-4.477 0-8.105 3.631-8.105 8.113 0 4.482 3.628 8.113 8.106 8.113 4.477 0 8.106-3.631 8.106-8.113 0-4.482-3.629-8.113-8.106-8.113z">
+        </path>
+      </svg>
+      <div class="search-bar">
+        <input type="text" class="search-input" placeholder="Search accounts and videos" />
+        <button class="search-btn">
+          <svg width="24" data-e2e="" height="24" viewBox="0 0 48 48" fill="rgba(255, 255, 255, .34)"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M22 10C15.3726 10 10 15.3726 10 22C10 28.6274 15.3726 34 22 34C28.6274 34 34 28.6274 34 22C34 15.3726 28.6274 10 22 10ZM6 22C6 13.1634 13.1634 6 22 6C30.8366 6 38 13.1634 38 22C38 25.6974 36.7458 29.1019 34.6397 31.8113L43.3809 40.5565C43.7712 40.947 43.7712 41.5801 43.3807 41.9705L41.9665 43.3847C41.5759 43.7753 40.9426 43.7752 40.5521 43.3846L31.8113 34.6397C29.1019 36.7458 25.6974 38 22 38C13.1634 38 6 30.8366 6 22Z">
+            </path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="nav-right">
+        <button class="upload-btn">
+          <svg class="tiktok-qeydvm-StyledPlusIcon e18d3d944" width="1em" data-e2e="" height="1em" viewBox="0 0 16 16"
+            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M8 2.5C7.58579 2.5 7.25 2.83579 7.25 3.25V7.25H3.25C2.83579 7.25 2.5 7.58579 2.5 8C2.5 8.41421 2.83579 8.75 3.25 8.75H7.25V12.75C7.25 13.1642 7.58579 13.5 8 13.5C8.41421 13.5 8.75 13.1642 8.75 12.75V8.75H12.75C13.1642 8.75 13.5 8.41421 13.5 8C13.5 7.58579 13.1642 7.25 12.75 7.25H8.75V3.25C8.75 2.83579 8.41421 2.5 8 2.5Z">
+            </path>
+          </svg>
+          <span>Upload</span></button>
+        <button class="login-btn">Log in</button>
+        <div class="drop-down">
+          <i class="fas fa-ellipsis-v fa-lg"></i>
+          <div class="menu hidden">
+            <ul>
+              <li>
+                <a href="#"><i class="fas fa-font fa-lg"></i> English</a>
+              </li>
+              <li>
+                <a href="#"><i class="far fa-question-circle fa-lg"></i>Feedbackg and help</a>
+              </li>
+              <li>
+                <a href="#"><i class="far fa-keyboard fa-lg"></i>Keyboard shortcuts</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="left">
+      <div class="btns">
+        <a href="#"><svg width="32" data-e2e="" height="32" viewBox="0 0 48 48" fill="rgba(255, 59, 92, 1)"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M24.9505 7.84001C24.3975 7.38666 23.6014 7.38666 23.0485 7.84003L6.94846 21.04C6.45839 21.4418 6.2737 22.1083 6.48706 22.705C6.70041 23.3017 7.26576 23.7 7.89949 23.7H10.2311L11.4232 36.7278C11.5409 38.0149 12.6203 39 13.9128 39H21.5C22.0523 39 22.5 38.5523 22.5 38V28.3153C22.5 27.763 22.9477 27.3153 23.5 27.3153H24.5C25.0523 27.3153 25.5 27.763 25.5 28.3153V38C25.5 38.5523 25.9477 39 26.5 39H34.0874C35.3798 39 36.4592 38.0149 36.577 36.7278L37.7691 23.7H40.1001C40.7338 23.7 41.2992 23.3017 41.5125 22.705C41.7259 22.1082 41.5412 21.4418 41.0511 21.04L24.9505 7.84001Z">
+            </path>
+          </svg><span>For You</span></a>
+        <a href="#"><svg width="32" data-e2e="" height="32" viewBox="0 0 48 48" fill="rgba(255, 255, 255, .9)"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M18 12.5C15.5897 12.5 13.5849 14.5018 13.5849 17.0345C13.5849 19.5672 15.5897 21.569 18 21.569C20.4103 21.569 22.4151 19.5672 22.4151 17.0345C22.4151 14.5018 20.4103 12.5 18 12.5ZM10.5849 17.0345C10.5849 12.9017 13.8766 9.5 18 9.5C22.1234 9.5 25.4151 12.9017 25.4151 17.0345C25.4151 21.1673 22.1234 24.569 18 24.569C13.8766 24.569 10.5849 21.1673 10.5849 17.0345ZM18 29.8793C14.0801 29.8793 10.7403 32.5616 9.69697 36.2673C9.5473 36.7989 9.03833 37.1708 8.49337 37.0811L7.50662 36.9189C6.96166 36.8292 6.58837 36.3131 6.72325 35.7776C8.00732 30.6788 12.5509 26.8793 18 26.8793C23.449 26.8793 27.9927 30.6788 29.2767 35.7776C29.4116 36.3131 29.0383 36.8292 28.4934 36.9189L27.5066 37.0811C26.9617 37.1708 26.4527 36.7989 26.303 36.2673C25.2597 32.5616 21.9199 29.8793 18 29.8793Z">
+            </path>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M33 31.5371C32.2445 31.5371 31.5198 31.668 30.8447 31.9093C30.3246 32.0951 29.7189 31.9243 29.4549 31.4392L28.9769 30.5608C28.713 30.0757 28.8907 29.463 29.4009 29.2516C30.513 28.791 31.7285 28.5371 33 28.5371C37.4554 28.5371 41.1594 31.6303 42.2706 35.7812C42.4135 36.3147 42.0386 36.8308 41.4935 36.9196L40.5065 37.0804C39.9614 37.1692 39.4546 36.7956 39.2894 36.2686C38.4217 33.5 35.91 31.5371 33 31.5371Z">
+            </path>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M33 18.5C31.6193 18.5 30.5 19.6193 30.5 21C30.5 22.3807 31.6193 23.5 33 23.5C34.3807 23.5 35.5 22.3807 35.5 21C35.5 19.6193 34.3807 18.5 33 18.5ZM27.5 21C27.5 17.9624 29.9624 15.5 33 15.5C36.0376 15.5 38.5 17.9624 38.5 21C38.5 24.0376 36.0376 26.5 33 26.5C29.9624 26.5 27.5 24.0376 27.5 21Z">
+            </path>
+          </svg> <span>Following</span></a>
+        <a href="#"><svg width="32" data-e2e="" height="32" viewBox="0 0 32 32" fill="rgba(255, 255, 255, .9)"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M7.78511 10.3334C6.95518 10.3334 6.33301 10.9792 6.33301 11.7143V20.2858C6.33301 21.0209 6.95518 21.6667 7.78511 21.6667H18.5744C19.4043 21.6667 20.0265 21.0209 20.0265 20.2858V17.5602C20.0265 17.1826 20.2392 16.8372 20.5763 16.6672C20.9135 16.4973 21.3177 16.5317 21.6212 16.7563L25.6663 19.7488V12.2513L21.6212 15.2439C21.3177 15.4684 20.9135 15.5029 20.5763 15.3329C20.2392 15.1629 20.0265 14.8175 20.0265 14.4399V11.7143C20.0265 10.9792 19.4043 10.3334 18.5744 10.3334H7.78511ZM25.6855 12.2371C25.6831 12.2388 25.6839 12.2383 25.6839 12.2383L25.6855 12.2371ZM25.6716 12.2177C25.673 12.2212 25.6746 12.2243 25.6763 12.2269C25.6798 12.2324 25.6834 12.2355 25.6855 12.2371L25.6874 12.2383C25.6874 12.2383 25.6865 12.238 25.6839 12.2383M4.33301 11.7143C4.33301 9.81952 5.90653 8.33337 7.78511 8.33337H18.5744C20.453 8.33337 22.0265 9.81953 22.0265 11.7143V12.4562L24.4963 10.629C25.0929 10.1877 25.8879 10.1155 26.5542 10.4359C27.224 10.758 27.6663 11.4325 27.6663 12.1905V19.8096C27.6663 20.5676 27.224 21.2421 26.5542 21.5642C25.888 21.8846 25.0929 21.8124 24.4963 21.371L22.0265 19.5439V20.2858C22.0265 22.1806 20.453 23.6667 18.5744 23.6667H7.78511C5.90653 23.6667 4.33301 22.1806 4.33301 20.2858V11.7143Z">
+            </path>
+            <path
+              d="M15 15.134C15.6667 15.5189 15.6667 16.4811 15 16.866L12 18.5981C11.3333 18.983 10.5 18.5019 10.5 17.7321L10.5 14.2679C10.5 13.4981 11.3333 13.017 12 13.4019L15 15.134Z">
+            </path>
+          </svg> <span>Live</span></a>
+      </div>
+      <div class="login">
+        <p>Log in to follow creators, like videos, and view comments</p>
+        <button>Log in</button>
+      </div>
+      <div class="accounts">
+        <p>Suggested accounts</p>
+        <div class="user">
+          <img
+            src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/91a5a0ee9ca88c6406c1ac0e021ec796~c5_100x100.jpeg?x-expires=1674997200&x-signature=DCLD7sqaHeFo5TRdcHFDrZ%2B4CJY%3D"
+            alt="avatar" />
+          <h6 class="username">markie lucas</h6>
+        </div>
+        <div class="user">
+          <img
+            src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/e394d9cabd126462e8bdfa9bb8a52a7d~c5_100x100.jpeg?x-expires=1674997200&x-signature=9bbwHlSak89b4ORlBKZYy3PJ%2BUg%3D"
+            alt="avatar" />
+          <h6 class="username">europaleauge</h6>
+        </div>
+        <div class="user">
+          <img
+            src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/257ee64495863e4de1f15375e446c5c1~c5_100x100.jpeg?x-expires=1674997200&x-signature=BUwogD2ha0o0tAFqW9fHH1QOkX4%3D"
+            alt="avatar" />
+          <h6 class="username">pirate</h6>
+        </div>
+        <div class="user">
+          <img
+            src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/ffdaccc0e108a50abcb36c5341007cc8~c5_100x100.jpeg?x-expires=1674997200&x-signature=JHbFL6A1nzWYGypytt8R2PsbpUE%3D"
+            alt="avatar" />
+          <h6 class="username">fball assassins</h6>
+        </div>
+      </div>
+      <div class="tags">
+        <p>Discover</p>
+        <div>
+          <a href="#"># tiktokcookbook</a>
+          <a href="#"># summeressentials</a>
+          <a href="#"># music</a>
+          <a href="#"># memories</a>
+          <a href="#"># whoisbetter</a>
+          <a href="#"># tiktokcookbook</a>
+          <a href="#"># summeressentials</a>
+          <a href="#"># music</a>
+          <a href="#"># memories</a>
+          <a href="#"># whoisbetter</a>
+        </div>
+      </div>
+      <div class="links">
+        <div>
+          <div class="link">
+            <a href="#">About</a>
+            <a href="#">Newsroom</a>
+            <a href="#">Contact</a>
+            <a href="#">Careers</a>
+            <a href="#">ByteDance</a>
+            <a href="#">About</a>
+            <a href="#">Newsroom</a>
+            <a href="#">Contact</a>
+            <a href="#">Careers</a>
+            <a href="#">ByteDance</a>
+          </div>
+          <div class="copyright">
+            <h5>&copy; 2022 TikTok</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="post">
+        <div class="post-info">
+          <div class="user">
+            <img
+              src="https://avatars.githubusercontent.com/u/96167561?s=400&u=84eebc1422a650886bc43db91d5f193b6f627452&v=4"
+              alt="avatar" />
+            <div>
+              <h6>Daya Chettri</h6>
+              <p>🤩 @melvinseliberg #fyp #skiing #parkski #viral</p>
+            </div>
+          </div>
+          <button>Follow</button>
+        </div>
+        <div class="post-content">
+          <video autoplay controls loop disablepictureinpicture controlslist="nodownload noplaybackrate">
+            <source src="ski.mp4" type="video/mp4" />
+          </video>
+          <div class="video-icons">
+            <a href="#"><i class="fas fa-heart fa-lg"></i><span>1.6K</span></a>
+            <a href="#"><i class="fas fa-comment-dots fa-lg"></i><span>423</span></a>
+            <a href="#"><i class="fas fa-share fa-lg"></i> <span>150</span></a>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </main>
+  <!-- script -->
+  <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-auth-compat.js"></script>
+  <script src="./scripts/index.js"></script>
+</body>
+
+</html>
