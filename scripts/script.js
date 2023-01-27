@@ -1,33 +1,25 @@
-// const menu = document.querySelector('.menu');
-// const dropDown = document.querySelector('.drop-down');
+const btnLogin = document.querySelector('.login-btn');
+const loginModal = document.querySelector('.login-modal');
+const closeLoginModal = document.querySelector('.close-login-modal');
+const overlay = document.querySelector('.overlay');
 
-// dropDown.addEventListener('mouseenter', () => {
-//   menu.classList.remove('hidden');
-// });
+function showModalFN() {
+  overlay.classList.remove('hidden');
+  loginModal.classList.remove('hidden');
+}
 
-// menu.addEventListener('mouseleave', () => {
-//   menu.classList.add('hidden');
-// });
+function closeModalFN() {
+  overlay.classList.add('hidden');
+  loginModal.classList.add('hidden');
+}
 
-// let video = document.querySelectorAll('video');
-// video.forEach((video) => {
-//   let playPromise = video.play();
-//   if (playPromise !== undefined) {
-//     playPromise.then(() => {
-//       let observer = new IntersectionObserver(
-//         (entries) => {
-//           entries.forEach((entry) => {
-//             video.muted = false;
-//             if (entry.intersectionRatio !== 1 && !video.paused) {
-//               video.pause();
-//             } else if (entry.intersectionRatio > 0.5 && video.paused) {
-//               video.play();
-//             }
-//           });
-//         },
-//         { threshold: 0.5 }
-//       );
-//       observer.observe(video);
-//     });
-//   }
-// });
+btnLogin.addEventListener('click', showModalFN);
+closeLoginModal.addEventListener('click', closeModalFN);
+overlay.addEventListener('click', closeModalFN);
+
+document.addEventListener('keydown', function (e) {
+  console.log(e);
+  if (e.key === 'Escape' && !loginModal.classList.contains('hidden')) {
+    closeModalFN();
+  }
+});
