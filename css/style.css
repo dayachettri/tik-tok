@@ -102,6 +102,13 @@ header {
   gap: 1rem;
 }
 
+.username-para {
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  color: rgb(233, 37, 76);
+}
+
 .upload-btn {
   background-color: rgba(255, 255, 255, 0.08);
   border: none;
@@ -112,6 +119,7 @@ header {
   gap: 10px;
   padding: 0.5rem 1rem;
   border-radius: 5px;
+  align-items: center;
 }
 
 .upload-btn:hover {
@@ -119,7 +127,7 @@ header {
   cursor: pointer;
 }
 
-.login-btn {
+.open-login-modal {
   padding: 0.5rem 1rem;
   color: #fff;
   background-color: rgb(254, 44, 85);
@@ -129,7 +137,7 @@ header {
   font-weight: 600;
 }
 
-.login-btn:hover {
+.open-login-modal:hover {
   background-color: rgb(233, 37, 76);
   cursor: pointer;
 }
