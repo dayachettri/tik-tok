@@ -68,6 +68,21 @@ function register() {
   loginSingupForm.reset();
 }
 
+window.addEventListener('load', () => {
+  const data = JSON.parse(localStorage.getItem('userData'));
+  if (data[0]) {
+    auth
+      .signInWithEmailAndPassword(data[0].email, data[0].password)
+      .then((resolve) => {
+        console.log(resolve.user);
+        isLoggedIn = true;
+        // overlay.classList.add('hidden');
+        // loginModal.classList.add('hidden');
+        loggedInTrue(data[0].email);
+      });
+  }
+});
+
 function login() {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
@@ -80,6 +95,8 @@ function login() {
       overlay.classList.add('hidden');
       loginModal.classList.add('hidden');
       loggedInTrue(email);
+      const userData = [{ email, password }];
+      window.localStorage.setItem('userData', JSON.stringify(userData));
     })
     .catch((error) => {
       alert(error.message);
