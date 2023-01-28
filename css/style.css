@@ -239,7 +239,7 @@ main {
   font-weight: 600;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  padding-left: 1rem;
+  /* padding-left: 1rem; */
   border-radius: 5px;
 }
 
@@ -312,7 +312,7 @@ main {
   border-radius: 5px;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  padding-left: 1rem;
+  /* padding-left: 1rem; */
   font-family: 'Ubuntu', sans-serif;
 }
 
