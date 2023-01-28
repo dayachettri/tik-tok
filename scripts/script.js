@@ -18,6 +18,7 @@ const btnUpdateData = document.querySelector('.btn-update-data');
 const btnDeleteData = document.querySelector('.btn-delete-data');
 const videoCaption = document.querySelector('.video-caption');
 const postsContainer = document.querySelector('.right');
+const uploadingAnimation = document.querySelector('.uploading-animation');
 let isLoggedIn = false;
 
 const firebaseApp = firebase.initializeApp({
@@ -241,6 +242,7 @@ function uploadVideo() {
   uploadTask.on(
     'state_changed',
     function progress(snapshot) {
+      uploadingAnimation.classList.remove('hidden');
       console.log('uploading');
     },
     function error(err) {
@@ -260,6 +262,7 @@ function uploadVideo() {
         .then(() => {
           overlay.classList.add('hidden');
           uploadModal.classList.add('hidden');
+          uploadingAnimation.classList.add('hidden');
         });
     }
   );
