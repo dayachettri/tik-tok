@@ -1,12 +1,17 @@
+// import { getStorage, ref, uploadBytes } from 'firebase/storage';
+
 const loginSingupForm = document.querySelector('.login-signup-form');
 const openLoginModal = document.querySelector('.open-login-modal');
 const loginModal = document.querySelector('.login-modal');
 const closeLoginModal = document.querySelector('.close-login-modal');
 const overlay = document.querySelector('.overlay');
-
+const uploadModal = document.querySelector('.upload-modal');
+const openUploadModal = document.querySelector('.open-upload-modal');
+const closeUploadModal = document.querySelector('.close-upload-modal');
+const chooseFileInput = document.querySelector('#choose-file');
+const btnUpload = document.querySelector('.upload-btn');
 const btnSignup = document.querySelector('.btn-signup');
 const btnLogin = document.querySelector('.btn-login');
-const btnUpload = document.querySelector('.upload-btn');
 const btnSave = document.querySelector('.btn-save');
 const btnGetData = document.querySelector('.btn-get-data');
 const btnUpdateData = document.querySelector('.btn-update-data');
@@ -25,6 +30,10 @@ const firebaseApp = firebase.initializeApp({
 
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
+const storage = firebase.storage();
+// const storageRef = storage.ref();
+const storageRef = firebase.storage().ref();
+const videosRef = storageRef.child('videos');
 
 function loggedInTrue(email) {
   const loginBox = document.querySelector('.login');
@@ -178,3 +187,73 @@ btnLogin.addEventListener('click', (event) => {
   event.preventDefault();
   login();
 });
+
+//# Upload Modal
+function showUploadModalFN() {
+  if (isLoggedIn) {
+    overlay.classList.remove('hidden');
+    uploadModal.classList.remove('hidden');
+  }
+}
+
+function closeUploadModalFN() {
+  overlay.classList.add('hidden');
+  uploadModal.classList.add('hidden');
+}
+
+openUploadModal.addEventListener('click', showUploadModalFN);
+closeUploadModal.addEventListener('click', closeUploadModalFN);
+overlay.addEventListener('click', closeUploadModalFN);
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && !uploadModal.classList.contains('hidden')) {
+    closeUploadModalFN();
+  }
+});
+
+let file = null;
+
+function uploadVideo() {
+  if (file === null) return;
+  // const videoRef = ref(storage, `videos/${file.name}`);
+
+  var videoRef = videosRef.child(file.name);
+
+  // uploadBytes(videoRef, file).then((snapshot) => {
+  //   console.log('Uploaded a blob or file!');
+  // });
+  // ref.put(videoRef).then((snapshot) => {
+  //   console.log('Uploaded a blob or file!');
+  // });
+
+  const uploadTask = videoRef.put(file);
+  uploadTask.on(
+    'state_changed',
+    function progress(snapshot) {
+      console.log('uploading');
+    },
+    function error(err) {
+      // Handle errors
+    },
+    function complete() {
+      // Handle completion
+      console.log('completed');
+      return uploadTask.snapshot.ref
+        .getDownloadURL()
+        .then((result) => {
+          console.log(result);
+        })
+        .then(() => {
+          overlay.classList.add('hidden');
+          uploadModal.classList.add('hidden');
+        });
+    }
+  );
+}
+
+chooseFileInput.addEventListener('change', (event) => {
+  file = event.target.files[0];
+  console.log(file);
+});
+
+btnUpload.addEventListener('click', uploadVideo);

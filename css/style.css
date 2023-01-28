@@ -109,7 +109,7 @@ header {
   color: rgb(233, 37, 76);
 }
 
-.upload-btn {
+.open-upload-modal {
   background-color: rgba(255, 255, 255, 0.08);
   border: none;
   color: #fff;
@@ -122,7 +122,7 @@ header {
   align-items: center;
 }
 
-.upload-btn:hover {
+.open-upload-modal:hover {
   background-color: rgba(255, 255, 255, 0.04);
   cursor: pointer;
 }
@@ -627,7 +627,8 @@ video::-webkit-media-controls-time-remaining-display {
   z-index: 10;
 }
 
-.close-login-modal {
+.close-login-modal,
+.close-upload-modal {
   font-size: 3rem;
   padding: 10px;
   border-radius: 50%;
@@ -703,4 +704,70 @@ video::-webkit-media-controls-time-remaining-display {
   background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(3px);
   z-index: 5;
+}
+
+.upload-modal {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 480px;
+  background-color: #252525;
+  padding: 20px 20px 120px 20px;
+  border-radius: 10px;
+  z-index: 10;
+  /* display: flex; */
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: ubuntu;
+}
+
+.upload-modal input {
+  margin-top: 10px;
+  width: 100%;
+  height: 40px;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 3px;
+  background-color: #3f3f3f;
+  color: #fff;
+  padding: 10px;
+}
+
+.upload-btn {
+  background-color: #ff3b5c;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  gap: 10px;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.upload-btn:hover {
+  background-color: rgb(233, 37, 76);
+}
+
+#choose-file {
+  display: none;
+}
+
+.choose-file span {
+  font-size: 16px;
+  margin: 10px 0;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.choose-file i {
+  font-size: 40px;
+  display: block;
+  color: rgb(233, 37, 76);
+  cursor: pointer;
 }
