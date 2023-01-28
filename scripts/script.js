@@ -276,7 +276,7 @@ function renderPost(object) {
     <div class="post-info">
       <div class="user">
         <img
-          src="https://avatars.githubusercontent.com/u/96167561?s=400&u=84eebc1422a650886bc43db91d5f193b6f627452&v=4"
+          src="https://api.dicebear.com/5.x/croodles/svg?seed=${item.id}"
           alt="avatar"
         />
         <div>
