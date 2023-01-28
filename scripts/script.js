@@ -1,5 +1,3 @@
-// import { getStorage, ref, uploadBytes } from 'firebase/storage';
-
 const loginSingupForm = document.querySelector('.login-signup-form');
 const openLoginModal = document.querySelector('.open-login-modal');
 const loginModal = document.querySelector('.login-modal');
@@ -34,11 +32,29 @@ const firebaseApp = firebase.initializeApp({
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 const storage = firebase.storage();
-// const storageRef = storage.ref();
 const storageRef = firebase.storage().ref();
 const videosRef = storageRef.child('videos');
-
 let userName = null;
+let postsData = null;
+let file = null;
+let caption = null;
+
+//# Autologin if user had logged in before
+window.addEventListener('load', () => {
+  const data = JSON.parse(localStorage.getItem('userData'));
+  if (data[0]) {
+    auth
+      .signInWithEmailAndPassword(data[0].email, data[0].password)
+      .then((resolve) => {
+        console.log(resolve.user);
+        isLoggedIn = true;
+        // overlay.classList.add('hidden');
+        // loginModal.classList.add('hidden');
+        loggedInTrue(data[0].email);
+      });
+  }
+});
+
 function loggedInTrue(email) {
   const loginBox = document.querySelector('.login');
   loginBox.classList.add('hidden');
@@ -50,6 +66,7 @@ function loggedInTrue(email) {
   readData();
 }
 
+//# Signup fn
 function register() {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
@@ -68,21 +85,7 @@ function register() {
   loginSingupForm.reset();
 }
 
-window.addEventListener('load', () => {
-  const data = JSON.parse(localStorage.getItem('userData'));
-  if (data[0]) {
-    auth
-      .signInWithEmailAndPassword(data[0].email, data[0].password)
-      .then((resolve) => {
-        console.log(resolve.user);
-        isLoggedIn = true;
-        // overlay.classList.add('hidden');
-        // loginModal.classList.add('hidden');
-        loggedInTrue(data[0].email);
-      });
-  }
-});
-
+//# Login fn
 function login() {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
@@ -107,11 +110,8 @@ function login() {
   loginSingupForm.reset();
 }
 
-//# Save Data
+//# Save Data fn
 function saveData(link, caption) {
-  // const email = document.getElementById('email').value;
-  // const password = document.getElementById('password').value;
-
   db.collection('posts')
     .add({
       link,
@@ -128,8 +128,6 @@ function saveData(link, caption) {
     });
 }
 
-let postsData = null;
-
 //# Read Data
 function readData() {
   db.collection('posts')
@@ -141,11 +139,8 @@ function readData() {
     })
     .then(() => {
       console.log(postsData);
-    })
-    .then(() => {
       renderPost(postsData);
     });
-  // console.log(postsData);
 }
 
 //# Update Data
@@ -168,88 +163,11 @@ function deleteData() {
     });
 }
 
-//# Event Listeners
-// btnSignup.addEventListener('click', (event) => {
-//   event.preventDefault();
-//   register();
-// });
-
-// btnLoginModal.addEventListener('click', (event) => {
-//   event.preventDefault();
-//   login();
-// });
-
-// btnSave.addEventListener('click', (event) => {
-//   saveData();
-// });
-
-// btnGetData.addEventListener('click', (event) => {
-//   readData();
-// });
-
-// btnUpdateData.addEventListener('click', (event) => {
-//   updateData();
-// });
-// btnDeleteData.addEventListener('click', (event) => {
-//   deleteData();
-// });
-
-//# Login / Signup Modal
-function showModalFN() {
-  overlay.classList.remove('hidden');
-  loginModal.classList.remove('hidden');
-}
-
-function closeModalFN() {
-  overlay.classList.add('hidden');
-  loginModal.classList.add('hidden');
-}
-
-openLoginModal.addEventListener('click', showModalFN);
-closeLoginModal.addEventListener('click', closeModalFN);
-overlay.addEventListener('click', closeModalFN);
-
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape' && !loginModal.classList.contains('hidden')) {
-    closeModalFN();
-  }
+//# Upload video fn
+chooseFileInput.addEventListener('change', (event) => {
+  file = event.target.files[0];
+  console.log(file);
 });
-
-btnLogin.addEventListener('click', (event) => {
-  event.preventDefault();
-  login();
-});
-
-btnSignup.addEventListener('click', (event) => {
-  event.preventDefault();
-  register();
-});
-
-//# Upload Modal
-function showUploadModalFN() {
-  if (isLoggedIn) {
-    overlay.classList.remove('hidden');
-    uploadModal.classList.remove('hidden');
-  }
-}
-
-function closeUploadModalFN() {
-  overlay.classList.add('hidden');
-  uploadModal.classList.add('hidden');
-}
-
-openUploadModal.addEventListener('click', showUploadModalFN);
-closeUploadModal.addEventListener('click', closeUploadModalFN);
-overlay.addEventListener('click', closeUploadModalFN);
-
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape' && !uploadModal.classList.contains('hidden')) {
-    closeUploadModalFN();
-  }
-});
-
-let file = null;
-let caption = null;
 
 function uploadVideo() {
   if (file === null) return;
@@ -285,6 +203,7 @@ function uploadVideo() {
   );
 }
 
+//# Render posts fn
 function renderPost(object) {
   const posts = object
     .map((item) => {
@@ -305,8 +224,6 @@ function renderPost(object) {
     </div>
     <div class="post-content">
       <video
-        autoplay
-        muted 
         controls 
         loop 
         disablepictureinpicture 
@@ -338,13 +255,7 @@ function renderPost(object) {
   postsContainer.insertAdjacentHTML('afterbegin', posts);
 }
 
-chooseFileInput.addEventListener('change', (event) => {
-  file = event.target.files[0];
-  console.log(file);
-});
-
-btnUpload.addEventListener('click', uploadVideo);
-
+//# video play / pause copied from github 😂
 let video = document.body.querySelectorAll('video');
 video.forEach((video) => {
   console.log(video);
@@ -366,5 +277,88 @@ video.forEach((video) => {
       );
       observer.observe(video);
     });
+  }
+});
+
+//# Event Listeners
+btnLogin.addEventListener('click', (event) => {
+  event.preventDefault();
+  login();
+});
+
+btnSignup.addEventListener('click', (event) => {
+  event.preventDefault();
+  register();
+});
+
+btnUpload.addEventListener('click', uploadVideo);
+
+// btnSignup.addEventListener('click', (event) => {
+//   event.preventDefault();
+//   register();
+// });
+
+// btnLoginModal.addEventListener('click', (event) => {
+//   event.preventDefault();
+//   login();
+// });
+
+// btnSave.addEventListener('click', (event) => {
+//   saveData();
+// });
+
+// btnGetData.addEventListener('click', (event) => {
+//   readData();
+// });
+
+// btnUpdateData.addEventListener('click', (event) => {
+//   updateData();
+// });
+// btnDeleteData.addEventListener('click', (event) => {
+//   deleteData();
+// });
+
+//# MODALS
+//# Login / Signup Modal
+function showModalFN() {
+  overlay.classList.remove('hidden');
+  loginModal.classList.remove('hidden');
+}
+
+function closeModalFN() {
+  overlay.classList.add('hidden');
+  loginModal.classList.add('hidden');
+}
+
+openLoginModal.addEventListener('click', showModalFN);
+closeLoginModal.addEventListener('click', closeModalFN);
+overlay.addEventListener('click', closeModalFN);
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && !loginModal.classList.contains('hidden')) {
+    closeModalFN();
+  }
+});
+
+//# Upload Modal
+function showUploadModalFN() {
+  if (isLoggedIn) {
+    overlay.classList.remove('hidden');
+    uploadModal.classList.remove('hidden');
+  }
+}
+
+function closeUploadModalFN() {
+  overlay.classList.add('hidden');
+  uploadModal.classList.add('hidden');
+}
+
+openUploadModal.addEventListener('click', showUploadModalFN);
+closeUploadModal.addEventListener('click', closeUploadModalFN);
+overlay.addEventListener('click', closeUploadModalFN);
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && !uploadModal.classList.contains('hidden')) {
+    closeUploadModalFN();
   }
 });

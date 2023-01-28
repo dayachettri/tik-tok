@@ -748,6 +748,7 @@ video::-webkit-media-controls-time-remaining-display {
   border-radius: 3px;
   align-items: center;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .upload-btn:hover {
@@ -823,6 +824,6 @@ video::-webkit-media-controls-time-remaining-display {
 
 .uploading {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   margin-top: 10px;
 }
