@@ -402,7 +402,6 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-//# video play / pause copied from github 😂
 function playPauseVideo() {
   let video = document.body.querySelectorAll('video');
   video.forEach((video) => {
