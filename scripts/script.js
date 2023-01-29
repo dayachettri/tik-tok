@@ -272,6 +272,8 @@ function renderPost(object) {
     </div>
     <div class="post-content">
       <video
+        autoplay
+        muted
         controls 
         loop 
         disablepictureinpicture 
@@ -301,32 +303,35 @@ function renderPost(object) {
     })
     .join('');
   postsContainer.insertAdjacentHTML('afterbegin', posts);
+  playPauseVideo();
 }
 
 //# video play / pause copied from github 😂
-let video = document.body.querySelectorAll('video');
-video.forEach((video) => {
-  console.log(video);
-  let playPromise = video.play();
-  if (playPromise !== undefined) {
-    playPromise.then(() => {
-      let observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            video.muted = false;
-            if (entry.intersectionRatio !== 1 && !video.paused) {
-              video.pause();
-            } else if (entry.intersectionRatio > 0.5 && video.paused) {
-              video.play();
-            }
-          });
-        },
-        { threshold: 0.5 }
-      );
-      observer.observe(video);
-    });
-  }
-});
+function playPauseVideo() {
+  let video = document.body.querySelectorAll('video');
+  video.forEach((video) => {
+    console.log(video);
+    let playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        let observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              video.muted = false;
+              if (entry.intersectionRatio !== 1 && !video.paused) {
+                video.pause();
+              } else if (entry.intersectionRatio > 0.5 && video.paused) {
+                video.play();
+              }
+            });
+          },
+          { threshold: 0.5 }
+        );
+        observer.observe(video);
+      });
+    }
+  });
+}
 
 //# Event Listeners
 btnLogin.addEventListener('click', (event) => {
