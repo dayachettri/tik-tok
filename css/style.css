@@ -827,3 +827,18 @@ video::-webkit-media-controls-time-remaining-display {
   gap: 30px;
   margin-top: 10px;
 }
+
+#copied-alert {
+  position: fixed;
+  right: 0;
+  top: 10%;
+  transform: translate(-0%, -10%);
+  font-family: ubuntu;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #2f2f2f;
+  border-radius: 10px;
+  font-weight: bold;
+  display: none;
+}

@@ -144,14 +144,62 @@ function readData() {
 }
 
 //# Update Data
-function updateData() {
-  db.collection('users')
-    .doc('AvViG5qIFakljTBmFn2H')
-    .update({ email: 'dayaChettri073@gmail.com', password: '123456' })
+function updateData(id, object) {
+  db.collection('posts')
+    .doc(id)
+    .update(object)
     .then(() => {
       alert('Data Updated');
     });
 }
+
+//# Update Likes
+document.body.addEventListener('click', (event) => {
+  if (loggedInTrue && event.target.classList.contains('fa-heart')) {
+    const element = event.target;
+    const likeEl = element.nextElementSibling;
+    const postId = element.closest('.post').dataset.id;
+    const objectID = postId;
+
+    const objectRef = firebase.firestore().collection('posts').doc(objectID);
+    objectRef
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          console.log('Document data:', doc.data());
+          const currentObjectData = { ...doc.data() };
+          const currentLikes = currentObjectData.likes;
+          console.log(currentObjectData);
+          updateData(objectID, {
+            ...currentObjectData,
+            likes: currentLikes + 1,
+          });
+          likeEl.textContent = currentLikes + 1;
+          element.style.color = '#fe2c55';
+        } else {
+          console.log('No such document!');
+        }
+      })
+      .catch(function (error) {
+        console.log('Error getting document:', error);
+      });
+  }
+});
+
+document.body.addEventListener('click', (event) => {
+  if (isLoggedIn && event.target.classList.contains('fa-share')) {
+    const element = event.target;
+    const modal = document.getElementById('copied-alert');
+    const currentPost = element.closest('.post');
+    const link = currentPost.querySelector('source').src;
+    navigator.clipboard.writeText(link);
+
+    modal.style.display = 'block';
+    setTimeout(function () {
+      modal.style.display = 'none';
+    }, 2000);
+  }
+});
 
 //# Delete Data
 function deleteData() {
@@ -208,7 +256,7 @@ function renderPost(object) {
   const posts = object
     .map((item) => {
       return `
-     <div class="post">
+     <div class="post" data-id="${item.id}">
     <div class="post-info">
       <div class="user">
         <img
@@ -229,7 +277,7 @@ function renderPost(object) {
         disablepictureinpicture 
         controlslist="nodownload noplaybackrate"
       >
-        <source
+        <source class="source"
           src="${item.link}"
           type="video/mp4"
         />
@@ -237,14 +285,14 @@ function renderPost(object) {
       <div class="video-icons">
         <a href="#">
           <i class="fas fa-heart fa-lg"></i>
-          <span>422</span>
+          <span class="likes-count">${item.likes}</span>
         </a>
         <a href="#">
           <i class="fas fa-comment-dots fa-lg"></i>
-          <span>123</span>
+          <span class="comment-count">${item.comments.length}</span>
         </a>
         <a href="#">
-          <i class="fas fa-share fa-lg"></i> <span>86</span>
+          <i class="fas fa-share fa-lg"></i>
         </a>
       </div>
     </div>
