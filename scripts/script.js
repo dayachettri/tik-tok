@@ -399,6 +399,7 @@ function playPauseVideo() {
 
   videos.forEach((video) => observer.observe(video));
 }
+playPauseVideo();
 
 function renderComments(array, element) {
   const comments = array
