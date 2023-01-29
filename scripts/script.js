@@ -42,7 +42,7 @@ let caption = null;
 //# Autologin if user had logged in before
 window.addEventListener('load', () => {
   const data = JSON.parse(localStorage.getItem('userData'));
-  if (data[0]) {
+  if (data) {
     auth
       .signInWithEmailAndPassword(data[0].email, data[0].password)
       .then((resolve) => {
@@ -290,7 +290,7 @@ function renderPost(object) {
           <span class="likes-count">${item.likes}</span>
         </a>
         <a href="#">
-          <i class="fas fa-comment-dots fa-lg"></i>
+          <i class="fas fa-comment-dots fa-lg openCommentsModal"></i>
           <span class="comment-count">${item.comments.length}</span>
         </a>
         <a href="#">
@@ -298,39 +298,25 @@ function renderPost(object) {
         </a>
       </div>
     </div>
+            <div class="comment-modal hidden">
+          <svg class="tiktok-1anes8e-StyledIcon e1gjoq3k3 close-comments-modal" width="1em" data-e2e="" height="1em"
+            viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M21.1718 23.9999L10.2931 13.1212C9.90261 12.7307 9.90261 12.0975 10.2931 11.707L11.7074 10.2928C12.0979 9.90228 12.731 9.90228 13.1216 10.2928L24.0002 21.1715L34.8789 10.2928C35.2694 9.90228 35.9026 9.90228 36.2931 10.2928L37.7073 11.707C38.0979 12.0975 38.0979 12.7307 37.7073 13.1212L26.8287 23.9999L37.7073 34.8786C38.0979 35.2691 38.0979 35.9023 37.7073 36.2928L36.2931 37.707C35.9026 38.0975 35.2694 38.0975 34.8789 37.707L24.0002 26.8283L13.1216 37.707C12.731 38.0975 12.0979 38.0975 11.7074 37.707L10.2931 36.2928C9.90261 35.9023 9.90261 35.2691 10.2931 34.8786L21.1718 23.9999Z">
+            </path>
+          </svg>
+          <input type="text" class="commentInput">
+          <button class="submitCommentBtn">Submit</button>
+          <div class="commentsContainer ">
+
+          </div>
+        </div>
   </div>
     `;
     })
     .join('');
   postsContainer.insertAdjacentHTML('afterbegin', posts);
   playPauseVideo();
-}
-
-//# video play / pause copied from github 😂
-function playPauseVideo() {
-  let video = document.body.querySelectorAll('video');
-  video.forEach((video) => {
-    console.log(video);
-    let playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        let observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              video.muted = false;
-              if (entry.intersectionRatio !== 1 && !video.paused) {
-                video.pause();
-              } else if (entry.intersectionRatio > 0.5 && video.paused) {
-                video.play();
-              }
-            });
-          },
-          { threshold: 0.5 }
-        );
-        observer.observe(video);
-      });
-    }
-  });
 }
 
 //# Event Listeners
@@ -413,5 +399,153 @@ overlay.addEventListener('click', closeUploadModalFN);
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape' && !uploadModal.classList.contains('hidden')) {
     closeUploadModalFN();
+  }
+});
+
+//# video play / pause copied from github 😂
+function playPauseVideo() {
+  let video = document.body.querySelectorAll('video');
+  video.forEach((video) => {
+    console.log(video);
+    let playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        let observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              video.muted = false;
+              if (entry.intersectionRatio !== 1 && !video.paused) {
+                video.pause();
+              } else if (entry.intersectionRatio > 0.5 && video.paused) {
+                video.play();
+              }
+            });
+          },
+          { threshold: 0.5 }
+        );
+        observer.observe(video);
+      });
+    }
+  });
+}
+
+// const commentInput = document.querySelector('.commentInput');
+// const submitCommentBtn = document.querySelector('.submitCommentBtn');
+// const commentsContainer = document.querySelector('.commentsContainer');
+// const openCommentsModal = document.querySelector('.open-comments-modal');
+// const closeCommentsModal = document.querySelector('.close-comments-modal');
+// const commentsModal = document.querySelector('.comment-modal');
+
+// submitCommentBtn.addEventListener('click', function () {
+//   let comment = commentInput.value;
+//   if (!comment) return;
+//   let newComment = `
+//     <div class="comment">
+//       <span class="username">Daya chettri</span>
+//       <p class="usercomment">${comment}</p>
+//     </div>`;
+//   commentsContainer.insertAdjacentHTML('afterbegin', newComment);
+
+//   commentInput.value = '';
+// });
+
+function renderComments(array, element) {
+  const comments = array
+    .map((comment) => {
+      return `
+       <div class="comment">
+      <span class="username">${comment.userName}</span>
+      <p class="usercomment">${comment.comment}</p>
+    </div>`;
+    })
+    .join('');
+  element.insertAdjacentHTML('afterbegin', comments);
+}
+
+document.body.addEventListener('click', (event) => {
+  if (event.target.classList.contains('openCommentsModal') && isLoggedIn) {
+    let commentArray = null;
+    const postId =
+      event.target.parentElement.parentElement.parentElement.parentElement
+        .dataset.id;
+    console.log(postId);
+    const element =
+      event.target.parentElement.parentElement.parentElement.parentElement.querySelector(
+        '.comment-modal'
+      );
+    const commentsContainer =
+      event.target.parentElement.parentElement.parentElement.parentElement.querySelector(
+        '.commentsContainer'
+      );
+    commentsContainer.innerHTML = '';
+    element.classList.remove('hidden');
+
+    let objectID = postId;
+    const objectRef = firebase.firestore().collection('posts').doc(objectID);
+    objectRef
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          console.log('Document data:', doc.data());
+          const currentObjectData = { ...doc.data() };
+          const currentObjectComments = currentObjectData.comments;
+          commentArray = currentObjectComments;
+          renderComments(commentArray, commentsContainer);
+          console.log(currentObjectComments);
+        } else {
+          console.log('No such document!');
+        }
+      })
+      .catch(function (error) {
+        console.log('Error getting document:', error);
+      });
+  }
+
+  if (event.target.classList.contains('close-comments-modal') && isLoggedIn) {
+    const element = event.target.parentElement;
+    element.classList.add('hidden');
+  }
+
+  if (event.target.classList.contains('submitCommentBtn') && isLoggedIn) {
+    const postId = event.target.parentElement.parentElement.dataset.id;
+    console.log(postId);
+    let commentInput = event.target.previousElementSibling;
+    const commentsContainer =
+      event.target.parentElement.querySelector('.commentsContainer');
+    const object = {
+      userName,
+      comment: commentInput.value,
+    };
+
+    let objectID = postId;
+    const objectRef = firebase.firestore().collection('posts').doc(objectID);
+    objectRef
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          console.log('Document data:', doc.data());
+          const currentObjectData = { ...doc.data() };
+          const currentObjectComments = currentObjectData.comments;
+          const comments = [...currentObjectComments, object];
+          updateData(objectID, {
+            ...currentObjectData,
+            comments,
+          });
+        } else {
+          console.log('No such document!');
+        }
+      })
+      .catch(function (error) {
+        console.log('Error getting document:', error);
+      });
+    let newComment = `
+    <div class="comment">
+      <span class="username">${userName}</span>
+      <p class="usercomment">${commentInput.value}</p>
+    </div>`;
+    commentsContainer.insertAdjacentHTML('afterbegin', newComment);
+
+    commentInput.value = '';
+    console.log(object);
   }
 });

@@ -428,8 +428,9 @@ main {
   margin-top: 2rem;
   margin-right: 4rem;
   height: 38rem;
-  width: 80%;
+  /* width: 80%; */
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  position: relative;
 }
 
 .post-info {
@@ -841,4 +842,76 @@ video::-webkit-media-controls-time-remaining-display {
   border-radius: 10px;
   font-weight: bold;
   display: none;
+}
+
+.comment-modal {
+  position: absolute;
+  background-color: #252525;
+  padding: 5px 10px 10px 10px;
+  max-width: 42%;
+  width: 100%;
+  border-radius: 10px;
+  top: 8%;
+  right: 0;
+  max-height: 300px;
+  height: 100%;
+  overflow: hidden;
+  font-family: ubuntu;
+}
+
+.commentsContainer {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.commentInput {
+  width: 100%;
+  height: 25px;
+  border: none;
+  outline: none;
+  background-color: #2f2f2f;
+  color: #fff;
+  border: 1px solid rgb(254, 44, 85);
+  border-radius: 3px;
+  padding: 3px;
+  margin-top: 5px;
+}
+
+.submitCommentBtn {
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  color: #fff;
+  background-color: rgb(254, 44, 85);
+  font-weight: bold;
+  border-radius: 3px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.close-comments-modal {
+  font-size: 1.5rem;
+  border-radius: 50%;
+  /* background-color: #2e2e2e; */
+  margin-left: auto;
+  display: block;
+  cursor: pointer;
+}
+
+.commentsContainer .comment {
+  background-color: #3f3f3f;
+  padding: 5px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+}
+
+.commentsContainer .comment .username {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.commentsContainer .comment .usercomment {
+  font-size: 14px;
+  font-family: sans-serif;
 }

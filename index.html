@@ -11,7 +11,10 @@
   <link rel="shortcut icon"
     href="https://lf16-tiktok-common.ibytedtos.com/obj/tiktok-web-common-sg/mtact/static/images/logo_144c91a.png?v=2"
     type="image/x-icon">
-  <script src="https://kit.fontawesome.com/1a015cf62c.js" crossorigin="anonymous"></script>
+  <!-- <script src="https://kit.fontawesome.com/1a015cf62c.js" crossorigin="anonymous"></script> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./css/style.css" />
   <title>Tik-Tok</title>
 </head>
@@ -139,27 +142,19 @@
       <div class="accounts">
         <p>Suggested accounts</p>
         <div class="user">
-          <img
-            src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/91a5a0ee9ca88c6406c1ac0e021ec796~c5_100x100.jpeg?x-expires=1674997200&x-signature=DCLD7sqaHeFo5TRdcHFDrZ%2B4CJY%3D"
-            alt="avatar" />
+          <img src="https://api.dicebear.com/5.x/croodles/svg?seed=1" alt="avatar" />
           <h6 class="username">markie lucas</h6>
         </div>
         <div class="user">
-          <img
-            src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/e394d9cabd126462e8bdfa9bb8a52a7d~c5_100x100.jpeg?x-expires=1674997200&x-signature=9bbwHlSak89b4ORlBKZYy3PJ%2BUg%3D"
-            alt="avatar" />
+          <img src="https://api.dicebear.com/5.x/croodles/svg?seed=2" alt="avatar" />
           <h6 class="username">europaleauge</h6>
         </div>
         <div class="user">
-          <img
-            src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/257ee64495863e4de1f15375e446c5c1~c5_100x100.jpeg?x-expires=1674997200&x-signature=BUwogD2ha0o0tAFqW9fHH1QOkX4%3D"
-            alt="avatar" />
+          <img src="https://api.dicebear.com/5.x/croodles/svg?seed=3" alt="avatar" />
           <h6 class="username">pirate</h6>
         </div>
         <div class="user">
-          <img
-            src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/ffdaccc0e108a50abcb36c5341007cc8~c5_100x100.jpeg?x-expires=1674997200&x-signature=JHbFL6A1nzWYGypytt8R2PsbpUE%3D"
-            alt="avatar" />
+          <img src="https://api.dicebear.com/5.x/croodles/svg?seed=4" alt="avatar" />
           <h6 class="username">fball assassins</h6>
         </div>
       </div>
@@ -217,8 +212,21 @@
           </video>
           <div class="video-icons">
             <a href="#"><i class="fas fa-heart fa-lg"></i><span>422</span></a>
-            <a href="#"><i class="fas fa-comment-dots fa-lg"></i><span>123</span></a>
+            <a href="#"><i class="fas fa-comment-dots fa-lg open-comments-modal"></i><span>123</span></a>
             <a href="#"><i class="fas fa-share fa-lg"></i></a>
+          </div>
+        </div>
+        <div class="comment-modal hidden">
+          <svg class="tiktok-1anes8e-StyledIcon e1gjoq3k3 close-comments-modal" width="1em" data-e2e="" height="1em"
+            viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M21.1718 23.9999L10.2931 13.1212C9.90261 12.7307 9.90261 12.0975 10.2931 11.707L11.7074 10.2928C12.0979 9.90228 12.731 9.90228 13.1216 10.2928L24.0002 21.1715L34.8789 10.2928C35.2694 9.90228 35.9026 9.90228 36.2931 10.2928L37.7073 11.707C38.0979 12.0975 38.0979 12.7307 37.7073 13.1212L26.8287 23.9999L37.7073 34.8786C38.0979 35.2691 38.0979 35.9023 37.7073 36.2928L36.2931 37.707C35.9026 38.0975 35.2694 38.0975 34.8789 37.707L24.0002 26.8283L13.1216 37.707C12.731 38.0975 12.0979 38.0975 11.7074 37.707L10.2931 36.2928C9.90261 35.9023 9.90261 35.2691 10.2931 34.8786L21.1718 23.9999Z">
+            </path>
+          </svg>
+          <input type="text" class="commentInput">
+          <button class="submitCommentBtn">Submit</button>
+          <div class="commentsContainer ">
+
           </div>
         </div>
       </div>
@@ -239,7 +247,7 @@
           </video>
           <div class="video-icons">
             <a href="#"><i class="fas fa-heart fa-lg"></i><span>422</span></a>
-            <a href="#"><i class="fas fa-comment-dots fa-lg"></i><span>123</span></a>
+            <a href="#"><i class="fas fa-comment-dots fa-lg open-comments-modal"></i><span>123</span></a>
             <a href="#"><i class="fas fa-share fa-lg"></i> </a>
           </div>
         </div>
