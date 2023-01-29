@@ -274,8 +274,8 @@ function renderPost(object) {
       <video
         autoplay
         muted
+        loop
         controls 
-        loop 
         disablepictureinpicture 
         controlslist="nodownload noplaybackrate"
       >
@@ -332,31 +332,6 @@ btnSignup.addEventListener('click', (event) => {
 
 btnUpload.addEventListener('click', uploadVideo);
 
-// btnSignup.addEventListener('click', (event) => {
-//   event.preventDefault();
-//   register();
-// });
-
-// btnLoginModal.addEventListener('click', (event) => {
-//   event.preventDefault();
-//   login();
-// });
-
-// btnSave.addEventListener('click', (event) => {
-//   saveData();
-// });
-
-// btnGetData.addEventListener('click', (event) => {
-//   readData();
-// });
-
-// btnUpdateData.addEventListener('click', (event) => {
-//   updateData();
-// });
-// btnDeleteData.addEventListener('click', (event) => {
-//   deleteData();
-// });
-
 //# MODALS
 //# Login / Signup Modal
 function showModalFN() {
@@ -403,50 +378,27 @@ document.addEventListener('keydown', function (e) {
 });
 
 function playPauseVideo() {
-  let video = document.body.querySelectorAll('video');
-  video.forEach((video) => {
-    console.log(video);
-    let playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        let observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              video.muted = false;
-              if (entry.intersectionRatio !== 1 && !video.paused) {
-                video.pause();
-              } else if (entry.intersectionRatio > 0.5 && video.paused) {
-                video.play();
-              }
-            });
-          },
-          { threshold: 0.5 }
-        );
-        observer.observe(video);
-      });
-    }
+  const videos = document.querySelectorAll('video');
+  let currentVideo = null;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        video.muted = false;
+        video.play();
+        if (currentVideo && currentVideo !== video) {
+          currentVideo.pause();
+        }
+        currentVideo = video;
+      } else {
+        video.pause();
+      }
+    });
   });
+
+  videos.forEach((video) => observer.observe(video));
 }
-
-// const commentInput = document.querySelector('.commentInput');
-// const submitCommentBtn = document.querySelector('.submitCommentBtn');
-// const commentsContainer = document.querySelector('.commentsContainer');
-// const openCommentsModal = document.querySelector('.open-comments-modal');
-// const closeCommentsModal = document.querySelector('.close-comments-modal');
-// const commentsModal = document.querySelector('.comment-modal');
-
-// submitCommentBtn.addEventListener('click', function () {
-//   let comment = commentInput.value;
-//   if (!comment) return;
-//   let newComment = `
-//     <div class="comment">
-//       <span class="username">Daya chettri</span>
-//       <p class="usercomment">${comment}</p>
-//     </div>`;
-//   commentsContainer.insertAdjacentHTML('afterbegin', newComment);
-
-//   commentInput.value = '';
-// });
 
 function renderComments(array, element) {
   const comments = array
