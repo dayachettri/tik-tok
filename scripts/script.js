@@ -460,7 +460,9 @@ document.body.addEventListener('click', (event) => {
 
   if (event.target.classList.contains('submitCommentBtn') && isLoggedIn) {
     const postId = event.target.parentElement.parentElement.dataset.id;
-    console.log(postId);
+    const commentCount =
+      event.target.parentElement.parentElement.querySelector('.comment-count');
+    console.log(commentCount);
     let commentInput = event.target.previousElementSibling;
     const commentsContainer =
       event.target.parentElement.querySelector('.commentsContainer');
@@ -483,6 +485,7 @@ document.body.addEventListener('click', (event) => {
             ...currentObjectData,
             comments,
           });
+          commentCount.textContent = currentObjectComments.length + 1;
         } else {
           console.log('No such document!');
         }
