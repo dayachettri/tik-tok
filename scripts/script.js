@@ -260,7 +260,7 @@ function renderPost(object) {
     <div class="post-info">
       <div class="user">
         <img
-          src="https://api.dicebear.com/5.x/croodles/svg?seed=${item.id}"
+          src="https://api.dicebear.com/5.x/croodles/svg?seed=${item.userName}"
           alt="avatar"
         />
         <div>
