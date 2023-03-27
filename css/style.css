@@ -387,6 +387,14 @@ main {
 .right {
   flex: 2;
 }
+
+.warning {
+  font-size: 18px;
+  text-align: left;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
 .post {
   margin-top: 2rem;
   margin-right: 4rem;

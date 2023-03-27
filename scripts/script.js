@@ -1,5 +1,5 @@
 const loginSingupForm = document.querySelector('.login-signup-form');
-const openLoginModal = document.querySelector('.open-login-modal');
+const openLoginModal = document.querySelectorAll('.open-login-modal');
 const loginModal = document.querySelector('.login-modal');
 const closeLoginModal = document.querySelector('.close-login-modal');
 const overlay = document.querySelector('.overlay');
@@ -17,6 +17,7 @@ const btnDeleteData = document.querySelector('.btn-delete-data');
 const videoCaption = document.querySelector('.video-caption');
 const postsContainer = document.querySelector('.right');
 const uploadingAnimation = document.querySelector('.uploading-animation');
+const warning = document.querySelector('.warning');
 let isLoggedIn = false;
 
 const firebaseApp = firebase.initializeApp({
@@ -45,7 +46,7 @@ window.addEventListener('load', () => {
   if (data) {
     auth
       .signInWithEmailAndPassword(data[0].email, data[0].password)
-      .then((resolve) => {
+      .then(resolve => {
         console.log(resolve.user);
         isLoggedIn = true;
         // overlay.classList.add('hidden');
@@ -60,6 +61,7 @@ function loggedInTrue(email) {
   loginBox.classList.add('hidden');
   openLoginModal.classList.add('hidden');
   userName = email.slice(0, email.indexOf('@'));
+  warning.classList.add('hidden');
   const nav = document.querySelector('.nav-right');
   const userNamePara = `<p class="username-para">${userName}</p>`;
   nav.insertAdjacentHTML('afterbegin', userNamePara);
@@ -73,10 +75,11 @@ function register() {
 
   auth
     .createUserWithEmailAndPassword(email, password)
-    .then((resolve) => {
+    .then(resolve => {
       console.log(resolve.user);
+      alert('Account Created Enter Credentials And Login');
     })
-    .catch((error) => {
+    .catch(error => {
       alert(error.message);
       console.log(error.code);
       console.log(error.message);
@@ -92,7 +95,7 @@ function login() {
 
   auth
     .signInWithEmailAndPassword(email, password)
-    .then((resolve) => {
+    .then(resolve => {
       console.log(resolve.user);
       isLoggedIn = true;
       overlay.classList.add('hidden');
@@ -101,7 +104,7 @@ function login() {
       const userData = [{ email, password }];
       window.localStorage.setItem('userData', JSON.stringify(userData));
     })
-    .catch((error) => {
+    .catch(error => {
       alert(error.message);
       console.log(error.code);
       console.log(error.message);
@@ -120,10 +123,10 @@ function saveData(link, caption) {
       likes: 0,
       comments: [],
     })
-    .then((docRef) => {
+    .then(docRef => {
       console.log('Document written with ID:', docRef.id);
     })
-    .catch((error) => {
+    .catch(error => {
       console.log('Error adding document:', error);
     });
 }
@@ -132,8 +135,8 @@ function saveData(link, caption) {
 function readData() {
   db.collection('posts')
     .get()
-    .then((data) => {
-      postsData = data.docs.map((item) => {
+    .then(data => {
+      postsData = data.docs.map(item => {
         return { ...item.data(), id: item.id };
       });
     })
@@ -154,7 +157,7 @@ function updateData(id, object) {
 }
 
 //# Update Likes
-document.body.addEventListener('click', (event) => {
+document.body.addEventListener('click', event => {
   if (loggedInTrue && event.target.classList.contains('fa-heart')) {
     const element = event.target;
     const likeEl = element.nextElementSibling;
@@ -186,7 +189,7 @@ document.body.addEventListener('click', (event) => {
   }
 });
 
-document.body.addEventListener('click', (event) => {
+document.body.addEventListener('click', event => {
   if (isLoggedIn && event.target.classList.contains('fa-share')) {
     const element = event.target;
     const modal = document.getElementById('copied-alert');
@@ -212,7 +215,7 @@ function deleteData() {
 }
 
 //# Upload video fn
-chooseFileInput.addEventListener('change', (event) => {
+chooseFileInput.addEventListener('change', event => {
   file = event.target.files[0];
   console.log(file);
 });
@@ -236,7 +239,7 @@ function uploadVideo() {
       console.log('completed');
       return uploadTask.snapshot.ref
         .getDownloadURL()
-        .then((url) => {
+        .then(url => {
           saveData(url, videoCaption.value);
         })
         .then(() => {
@@ -254,7 +257,7 @@ function uploadVideo() {
 //# Render posts fn
 function renderPost(object) {
   const posts = object
-    .map((item) => {
+    .map(item => {
       return `
      <div class="post" data-id="${item.id}">
     <div class="post-info">
@@ -320,12 +323,12 @@ function renderPost(object) {
 }
 
 //# Event Listeners
-btnLogin.addEventListener('click', (event) => {
+btnLogin.addEventListener('click', event => {
   event.preventDefault();
   login();
 });
 
-btnSignup.addEventListener('click', (event) => {
+btnSignup.addEventListener('click', event => {
   event.preventDefault();
   register();
 });
@@ -344,7 +347,9 @@ function closeModalFN() {
   loginModal.classList.add('hidden');
 }
 
-openLoginModal.addEventListener('click', showModalFN);
+openLoginModal.forEach(btn => {
+  btn.addEventListener('click', showModalFN);
+});
 closeLoginModal.addEventListener('click', closeModalFN);
 overlay.addEventListener('click', closeModalFN);
 
@@ -381,8 +386,8 @@ function playPauseVideo() {
   const videos = document.querySelectorAll('video');
   let currentVideo = null;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
       const video = entry.target;
       if (entry.isIntersecting) {
         video.muted = false;
@@ -397,13 +402,13 @@ function playPauseVideo() {
     });
   });
 
-  videos.forEach((video) => observer.observe(video));
+  videos.forEach(video => observer.observe(video));
 }
 playPauseVideo();
 
 function renderComments(array, element) {
   const comments = array
-    .map((comment) => {
+    .map(comment => {
       return `
        <div class="comment">
       <span class="username">${comment.userName}</span>
@@ -414,7 +419,7 @@ function renderComments(array, element) {
   element.insertAdjacentHTML('afterbegin', comments);
 }
 
-document.body.addEventListener('click', (event) => {
+document.body.addEventListener('click', event => {
   if (event.target.classList.contains('openCommentsModal') && isLoggedIn) {
     let commentArray = null;
     const postId =
