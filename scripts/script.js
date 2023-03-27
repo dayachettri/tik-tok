@@ -59,7 +59,9 @@ window.addEventListener('load', () => {
 function loggedInTrue(email) {
   const loginBox = document.querySelector('.login');
   loginBox.classList.add('hidden');
-  openLoginModal.classList.add('hidden');
+  openLoginModal.forEach(modal => {
+    modal.classList.add('hidden');
+  });
   userName = email.slice(0, email.indexOf('@'));
   warning.classList.add('hidden');
   const nav = document.querySelector('.nav-right');
@@ -246,6 +248,7 @@ function uploadVideo() {
           readData();
         })
         .then(() => {
+          alert('Video Uploaded!');
           overlay.classList.add('hidden');
           uploadModal.classList.add('hidden');
           uploadingAnimation.classList.add('hidden');
